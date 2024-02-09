@@ -128,13 +128,12 @@ _C.DEBUG.SAVE_HEATMAPS_GT = False
 _C.DEBUG.SAVE_HEATMAPS_PRED = False
 
 
-def update_config(cfg, args):
-    cfg.defrost()
-    
-    cfg.merge_from_file(args.cfg)
-    cfg.merge_from_list(args.opts)
-
+def update_config(file):
+    cfg = _C.clone()
+    cfg.defrost() 
+    cfg.merge_from_file(file)
     cfg.freeze()
+    return cfg
 
 
 if __name__ == '__main__':
