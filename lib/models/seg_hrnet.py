@@ -267,10 +267,10 @@ class HighResolutionNet(nn.Module):
         ALIGN_CORNERS = config.MODEL.ALIGN_CORNERS
 
         # stem net
-        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=2, padding=1,
+        self.conv1 = nn.Conv2d(9, 64, kernel_size=3, stride=1, padding=1,
                                bias=False)
         self.bn1 = BatchNorm2d(64, momentum=BN_MOMENTUM)
-        self.conv2 = nn.Conv2d(64, 64, kernel_size=3, stride=2, padding=1,
+        self.conv2 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1,
                                bias=False)
         self.bn2 = BatchNorm2d(64, momentum=BN_MOMENTUM)
         self.relu = nn.ReLU(inplace=relu_inplace)
@@ -462,7 +462,7 @@ class HighResolutionNet(nn.Module):
 
         x = self.last_layer(x)
 
-        return x
+        return {"predicted_kelp_mask":x}
 
     def init_weights(self, pretrained='',):
         logger.info('=> init weights from normal distribution')
